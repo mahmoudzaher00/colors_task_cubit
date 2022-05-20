@@ -3,10 +3,12 @@ import 'dart:convert';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:task_cubit/screens/task/states.dart';
+import 'package:task_cubit/models/add_to_these_colors_model.dart';
+import 'package:task_cubit/models/AsyncValidationColorsModel.dart';
+import 'package:task_cubit/shared/blocs/states.dart';
 import 'package:flutter/services.dart';
 
-import 'model.dart';
+import '../../models/main_model.dart';
 
 class ColorsController extends Cubit<ColorsStates> {
   ColorsController() : super(ColorsInitialState());
@@ -16,6 +18,7 @@ class ColorsController extends Cubit<ColorsStates> {
   final textEditingTwoController = TextEditingController();
   var textEditingThreeController = TextEditingController();
   final textEditingFourController = TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   List<AsyncValidationColors>? items;
   List<AddToTheseColors>? addToTheseColor;
@@ -35,14 +38,6 @@ class ColorsController extends Cubit<ColorsStates> {
     emit(GetColorsState());
   }
 
-  Future<List<String>> getSuggestions()async{
-    final String response = await rootBundle.loadString('assets/colors.json');
-    final data = ColorsDataModel.fromJson(json.decode(response));
-    List<String>? suggestions =data.groupOfColors.autoSuggestionsColors;
-    return suggestions;
-  }
-
-
   showTextFieldFunction(String textValue,context) {
     if (textValue.toLowerCase() == "a") {
       _showTextField = true;
@@ -60,12 +55,6 @@ class ColorsController extends Cubit<ColorsStates> {
     emit(ShowTextField());
   }
 
-  void checkColor(String value, String errorMsg) async {
-    if (textEditingTwoController.text == value) {
-      print(errorMsg);
-    }
-    emit(ShowTextField());
-  }
   String? textFieldOneValidate(String? value) {
     if (textEditingOneController.text.length < 6) {
       return 'text must be more than 5 Characters';
@@ -74,11 +63,10 @@ class ColorsController extends Cubit<ColorsStates> {
     }
     return null;
   }
-  onChangeTwo(String value,context) {
-    // value.toLowerCase() == "b";
+
+  validationColors(String value,context) {
     if(value.toLowerCase() ==items![0].color.toLowerCase())
       {
-
         isThirdShow=false;
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(items![0].errorMessage),duration: const Duration(milliseconds: 600)));
       }else

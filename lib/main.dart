@@ -1,7 +1,5 @@
-
 import 'package:flutter/material.dart';
-
-import 'screens/task/view.dart';
+import 'package:task_cubit/screens/home/view.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,26 +15,20 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        inputDecorationTheme: InputDecorationTheme(
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: const BorderSide(
-              color: Color(0xffFFF1ED),
-            ),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: const BorderSide(
-              color: Color(0xffE6E6E6),
-            ),
-          )
-        )
-      ),
-      home:TaskScreen(),
+          inputDecorationTheme: InputDecorationTheme(
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: const BorderSide(
+                  color: Color(0xffFFF1ED),
+                ),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: const BorderSide(
+                  color: Color(0xffE6E6E6),
+                ),
+              ))),
+      home: Home(),
     );
   }
 }
-
-
-
-

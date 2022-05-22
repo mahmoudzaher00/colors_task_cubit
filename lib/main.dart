@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:task_cubit/screens/home/view.dart';
+import 'package:task_cubit/screens/home/view_imports.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,20 +15,25 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          inputDecorationTheme: InputDecorationTheme(
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: const BorderSide(
-                  color: Color(0xffFFF1ED),
-                ),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: const BorderSide(
-                  color: Color(0xffE6E6E6),
-                ),
-              ))),
-      home: Home(),
+        inputDecorationTheme: InputDecorationTheme(
+          enabledBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.blue, width: .5),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: const BorderSide(color: Colors.blue, width: 1)),
+          errorBorder: OutlineInputBorder(
+              borderSide:
+                  BorderSide(color: Colors.blue.withOpacity(.5), width: 1),
+              borderRadius: BorderRadius.circular(8)),
+          focusedErrorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: const BorderSide(color: Colors.blue, width: 2)),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
+        ),
+      ),
+      home: const Home(),
     );
   }
 }

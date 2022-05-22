@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:task_cubit/widgets/custom_button.dart';
-import 'package:task_cubit/widgets/custom_text.dart';
+part of'view_imports.dart';
 
 class SecondScreen extends StatelessWidget {
   const SecondScreen({Key? key}) : super(key: key);
@@ -11,13 +9,34 @@ class SecondScreen extends StatelessWidget {
         appBar: AppBar(
           title: const CustomText(
             text: 'Home',
+            color: Colors.white,
           ),
+          leading: const SizedBox.shrink(),
+          leadingWidth: 0,
         ),
         body: Center(
-          child: CustomButton(
-            text:'Back to previous screen',
-            onPressed:()=> Navigator.pop(context) ,
-          )
+            child: SizedBox(
+                height: 40,
+                width: MediaQuery.of(context).size.width*.6,
+                child: CustomElevatedBtn(
+                  backgroundColor: Colors.blue,
+                  childWidget:  const CustomText(
+                    text: 'Back to previous screen',
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
+                    alignment: Alignment.center,
+                  ),
+                  onPressedFunction: (){
+                        Navigator.pop(context);
+                         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const Home()));
+                  },
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              )
+
         ));
   }
 }
+
+

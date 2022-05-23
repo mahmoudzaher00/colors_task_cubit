@@ -8,7 +8,7 @@ class SecondScreen extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: const CustomText(
-            text: 'Home',
+            text: 'Color Home',
             color: Colors.white,
           ),
           leading: const SizedBox.shrink(),

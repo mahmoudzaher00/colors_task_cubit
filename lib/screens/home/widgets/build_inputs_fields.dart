@@ -5,7 +5,6 @@ class BuildInputsFields extends StatelessWidget {
       {required this.controller,
       required this.mediaQuery,
       required this.statusBarHeight,
-
       });
 
   final HomeCubit controller;
@@ -37,7 +36,6 @@ class BuildInputsFields extends StatelessWidget {
               alignment: Alignment.center,
             ),
             SizedBox(height: mediaQuery.height * .05,),
-
             BuildTextFieldView(
 
                 controller: controller.homeViewData.textEditingOneController,
@@ -148,7 +146,6 @@ class BuildConfirmBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomButton(
-      keyValue:  Key('click'),
       controller: controller,
       text: 'Confirm',
       onPressed: () {

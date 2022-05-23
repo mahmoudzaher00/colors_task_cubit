@@ -1,14 +1,10 @@
 
 
-import 'package:bloc/src/change.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:task_cubit/models/AsyncValidationColorsModel.dart';
-import 'package:task_cubit/models/add_to_these_colors_model.dart';
+import 'package:mockito/mockito.dart';
 import 'package:task_cubit/screens/home/view_imports.dart';
 import 'package:task_cubit/shared/home_cubit/cubit.dart';
-import 'package:task_cubit/shared/home_cubit/states.dart';
-import 'package:mockito/mockito.dart';
 import 'package:task_cubit/unit_test/validator_test.dart';
 
 class MockHomeTest extends Mock implements HomeCubit,TextFieldValidator{}
@@ -20,48 +16,17 @@ void main(){
       home: child,
     );
   }
-  testWidgets('text field one empty', (WidgetTester tester) async{
-    Home home=const Home();
-
-    await tester.pumpWidget(makeTestableWidget(child: home));
-    Finder firstInput=find.byKey(Key('text field one'));
-    expect(firstInput, findsOneWidget);
-
-
-  });
-
-  testWidgets('text fields empty', (WidgetTester tester) async {
-
-    MockHomeTest mockHomeTest=MockHomeTest();
-
-    Home home=const Home();
-    await tester.pumpWidget(
-       makeTestableWidget(child: home,)
-    );
-   // await tester.tap(find.text('Confirm'));
-
-    await tester.tap(find.byKey(const Key('click')));
-    var x=mockHomeTest.homeViewData.allValuesCorrects('','','','',BuildContext);
-    verifyNever(x);
-    expect(x, null);
-
-  });
-
-  testWidgets('first text field value less than 5', (WidgetTester tester) async {
+  testWidgets('first text field value = a', (WidgetTester tester) async {
     MockHomeTest mockColorsTest=MockHomeTest();
-   // mockColorsTest.allValuesCorrect(BuildContext);
+    // mockColorsTest.allValuesCorrect(BuildContext);
 
     Home home=const Home();
     await tester.pumpWidget(makeTestableWidget(child: home));
 
-    verifyNever(mockColorsTest.textFieldsValidation('colors'));
-    verifyNever(mockColorsTest.textFieldTwoOnChanged('red', BuildContext));
-    verifyNever(mockColorsTest.textFieldOneValidator('col'));
-    verifyNever(mockColorsTest.textFieldTwoValidator('green'));
+    verifyNever(mockColorsTest.textFieldOneOnChanged('a',BuildContext)).called(0);
 
 
   });
-
   testWidgets('second text field value = blue', (WidgetTester tester) async {
     MockHomeTest mockColorsTest=MockHomeTest();
     // mockColorsTest.allValuesCorrect(BuildContext);
@@ -79,17 +44,65 @@ void main(){
 
   });
 
-  testWidgets('first text field value = a', (WidgetTester tester) async {
+  testWidgets('first text field value less than 5', (WidgetTester tester) async {
     MockHomeTest mockColorsTest=MockHomeTest();
     // mockColorsTest.allValuesCorrect(BuildContext);
 
     Home home=const Home();
     await tester.pumpWidget(makeTestableWidget(child: home));
 
-    verifyNever(mockColorsTest.textFieldOneOnChanged('a',BuildContext)).called(0);
+    verifyNever(mockColorsTest.textFieldsValidation('colors'));
+    verifyNever(mockColorsTest.textFieldTwoOnChanged('red', BuildContext));
+    verifyNever(mockColorsTest.textFieldOneValidator('col'));
+    verifyNever(mockColorsTest.textFieldTwoValidator('green'));
 
 
   });
+
+  testWidgets('text field one empty', (WidgetTester tester) async{
+    Home home=const Home();
+
+    await tester.pumpWidget(makeTestableWidget(child: home));
+    Finder firstInput=find.byKey(Key('text field one'));
+    expect(firstInput, findsOneWidget);
+
+
+  });
+  testWidgets('should have Confirm button', (WidgetTester tester)async{
+    MockHomeTest mockHomeTest=MockHomeTest();
+    Home home=const Home();
+    await tester.pumpWidget(
+        makeTestableWidget(child: home,)
+    );
+    Finder dd=find.byType(TextButton);
+    await tester.tap(dd);
+    await tester.pumpAndSettle();
+    expect(dd, findsOneWidget);
+
+
+});
+  testWidgets('text fields empty', (WidgetTester tester) async {
+
+    MockHomeTest mockHomeTest=MockHomeTest();
+
+    Home home=const Home();
+    await tester.pumpWidget(
+       makeTestableWidget(child: home,)
+    );
+   // await tester.tap(find.text('Confirm'));
+    Finder click=find.text('Confirm');
+    expect(click, findsOneWidget);
+    // await tester.tap(find.byKey(const Key('click')));
+    // var x=mockHomeTest.homeViewData.allValuesCorrects('','','','',BuildContext);
+    // verifyNever(x);
+    // expect(x, null);
+
+  });
+
+
+
+
+
 
   testWidgets('when all value is true', (WidgetTester tester) async {
     MockHomeTest mockColorsTest=MockHomeTest();

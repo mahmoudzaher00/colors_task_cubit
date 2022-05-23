@@ -18,7 +18,9 @@ class Home extends StatelessWidget {
             return Scaffold(
                 backgroundColor: Colors.white,
                 body: SafeArea(
-                  child:  BuildInputsFields(controller: controller, mediaQuery: _mediaQuery, statusBarHeight: statusBarHeight),
+                  child:  BuildInputsFields(
+                      controller: controller, mediaQuery: _mediaQuery, statusBarHeight: statusBarHeight
+                  ),
                 ));
           } else {
             return BuildLoadingView(

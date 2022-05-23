@@ -23,7 +23,7 @@ class HomeViewData {
 
   allValuesCorrects(txt1, txt2, txt3, txt4, context) {
     if (
-    txt1 == textEditingOneController.text &&
+       txt1 == textEditingOneController.text &&
         txt2 == textEditingTwoController.text &&
         txt3 == textEditingThreeController.text &&
         txt4 == textEditingFourController.text

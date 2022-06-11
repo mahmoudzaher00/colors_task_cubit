@@ -1,9 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task_cubit/screens/home/view_imports.dart';
+import 'package:task_cubit/screens/second_screen/view_imports.dart';
+import 'package:task_cubit/shared/marwan/marwan_cubit.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MyApp());
+  runApp(
+    MultiBlocProvider(providers:[
+      BlocProvider(
+        create: (BuildContext context) => MarwanCubit(),
+    ),
+
+    ] ,
+
+      child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -33,7 +44,7 @@ class MyApp extends StatelessWidget {
           contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
         ),
       ),
-      home: const Home(),
+      home: const SecondScreen(),
     );
   }
 }

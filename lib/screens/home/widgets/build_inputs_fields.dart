@@ -19,6 +19,8 @@ class BuildInputsFields extends StatelessWidget {
         child: ListView(
           controller: scroll,
           padding: const EdgeInsets.all(8),
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+
           children: [
             SizedBox(height: mediaQuery.height * .05,),
 
@@ -92,7 +94,6 @@ class BuildInputsFields extends StatelessWidget {
             padding: EdgeInsets.zero,
             itemBuilder: (context, index) {
               final option = options.elementAt(index);
-
               return ListTile(
                 // title: Text(option.toString()),
                 title: SubstringHighlight(
@@ -103,6 +104,7 @@ class BuildInputsFields extends StatelessWidget {
                 ),
                 onTap: () {
                   onSelected(option.toString());
+                  FocusManager.instance.primaryFocus?.unfocus();
                 },
               );
             },
@@ -129,6 +131,7 @@ class BuildInputsFields extends StatelessWidget {
         },
           validatorFunction: controller.textFieldsValidation,
           onEditingCompleteFunction: onEditingComplete,
+          textInputAction: TextInputAction.done,
         );
       },
     );

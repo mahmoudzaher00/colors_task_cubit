@@ -9,6 +9,7 @@ class BuildTextFieldView extends StatelessWidget {
     this.onChangedFunction,
     this.validatorFunction,
     this.onEditingCompleteFunction,
+    this.textInputAction
   });
 
   final TextEditingController controller;
@@ -20,6 +21,7 @@ class BuildTextFieldView extends StatelessWidget {
   FormFieldValidator<String>? validatorFunction;
   VoidCallback? onEditingCompleteFunction;
   FocusNode? focusNode;
+  TextInputAction? textInputAction;
 
 
 
@@ -36,6 +38,7 @@ class BuildTextFieldView extends StatelessWidget {
         focusNode: focusNode,
         onEditingComplete: onEditingCompleteFunction,
         validator:validatorFunction,
+        textInputAction: textInputAction,
 
       //controller.textFieldOneValidator
     );
